@@ -18,7 +18,7 @@ namespace Checkout.PaymentGateway.Service.Clients
         }
 
         /// <summary>
-        /// TODO: Consider having specific methods instead of passing in the URI
+        /// TODO: Consider having specific methods instead of passing in the URI and body
         /// </summary>
         public async Task<Response<T>> Post<T>(string uri, object body)
         {
@@ -28,7 +28,7 @@ namespace Checkout.PaymentGateway.Service.Clients
 
                 if (response.IsSuccessStatusCode) return await response.Content.ReadAsAsync<T>();
 
-                //TODO: Map acquiring bank responses to useful client errors
+                //TODO: Map acquiring bank responses to more useful errors
                 return new Response<T>(error: response.StatusCode.ToString());
             }
             catch (HttpRequestException e) when (e.InnerException is SocketException)

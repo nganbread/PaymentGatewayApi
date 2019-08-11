@@ -26,8 +26,8 @@ namespace Checkout.PaymentGateway.Service.Services
 
         /// <summary>
         /// Even though all of the events are fired in one method, as the payment flow becomes
-        /// more complicated (adding sanctions screening, non-trivial validation etc) it is
-        /// simple to refactor the service, audit the payment and add further events.
+        /// more complicated (adding sanctions screening, non-trivial validation, eventual consistency etc) it
+        /// would be 'simple' to refactor the service, audit the payment and add further events.
         /// </summary>
         public async Task<Response> Create(CreateRequest request)
         {

@@ -4,7 +4,7 @@ using Checkout.PaymentGateway.Service.Eventing.Events.Payment;
 namespace Checkout.PaymentGateway.Service.Domain
 {
     /// <summary>
-    /// TODO: investigate FSMs to manage moving between valid states
+    /// TODO: consider investigating FSMs to manage moving between valid states
     /// </summary>
     public class Payment
     {
