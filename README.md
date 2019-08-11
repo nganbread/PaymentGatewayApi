@@ -22,7 +22,7 @@ or using docker
 
 ## API Documentation
 
-Follow `Get Started` and navigate to `/swagger`
+Follow [Get Started](#Get-Started) and navigate to `/swagger`
 
 ## Design
 
@@ -35,14 +35,24 @@ Follow `Get Started` and navigate to `/swagger`
     - The API and documentation is versioned
 - Integration Tests
     - Integration tests can be executed completely within the test process. This is enabled by default, but can be toggled on/off in `appsettings.integration.Development.json`
-        - Set 'IntegrationTests.InMemoryPaymentGatewayApi = true' to run the payment gateway API as an in-memory test server
+        - Set `IntegrationTests.InMemoryPaymentGatewayApi = true` to run the payment gateway API as an in-memory test server
         - If `IntegrationTests.InMemoryPaymentGatewayApi = false` then `PaymentGatewayApiUrl` is required.
         - Set `IntegrationTests.InMemoryFakeAcquiringBankApi = true` to configure the the acquiring bank API as an in-memory test server
-    - The tests make use of an `IHostBuilder` (see `IntegrationTestHostBuilder`) to manage the integration test services, logging and configuration. While we are not 'hosting' anything, using these dotnet APIs makes it easier to work with nuget packages and keeps it more consistent with the rest of the application
+    - The tests make use of an `IHostBuilder` (see `IntegrationTestHostBuilder`) to manage the integration test services, logging and configuration. While we are not 'hosting' anything, using these dotnet APIs makes it easier to work with nuget packages (eg `IHttpClientFactory`) and keeps it more consistent with the rest of the application
 - Fake Acquiring Bank
-    - The fake API is hard coded to return specific responses based on the `CardNumber` in the request body.
+    - The fake API is hard coded to return specific responses based on the `CardNumber` found in the request body.
     - To swap out the API in production, `AcquiringBankApi.Uri` can be set in `appsettings.json`
-    - See `Fake/Checkout.PaymentGateway.Fake.AcquiringBank.Api/README.md`
+    - See `/Fake/Checkout.PaymentGateway.Fake.AcquiringBank.Api/README.md`
+- Docker
+    - `docker-compose` has been utilised to build, run and test the application.
+    - There are 3 services which are configured with docker-compose
+        - `payment-gateway-api`
+        - `fake-acquiring-bank-api`
+        - `integration-tests`
+    - When `integration-tests` is started it will automatically execute the integration tests against the API, which is then set up to communicate with the faked acquiring bank.
+- Documentation
+    - API documentation is automatically discovered and made accessible by swagger
+    - Configuring the code to be auto discoverable by swagger can be difficult sometimes
 
 ## Limitations
 
@@ -57,4 +67,6 @@ Follow `Get Started` and navigate to `/swagger`
     - Proper authentication/authorization has not been fully implemented
     - To authenticate with the API set the `Authorize` request header to a/your/the merchants name
 - HTTPS
-    The API does not use HTTPs
+    - The API does not use HTTPs
+- CI/CD
+    - This has not been implemented, however the build should work everywhere that docker is supported

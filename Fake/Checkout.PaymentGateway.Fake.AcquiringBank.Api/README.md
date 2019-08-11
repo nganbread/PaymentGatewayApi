@@ -12,7 +12,7 @@ Responses are determined by the last digit of the card number:
 
 | Last Digit | Response Code  | Description 						|
 |-------------|---------------|-------------------------------------|
-| 1			  | 201			  | Returns {"PaymentId":"<guid>"}		|
+| 1			  | 201			  | Returns {"PaymentId":"{guid}"}		|
 | 2			  | 500			  | 									|
 | Other		  | 400			  | 									|
 
