@@ -1,0 +1,24 @@
+version: '3'
+services:
+  fake-acquiring-bank-api:
+    build:
+      context: .
+      dockerfile: ./Fake/Checkout.PaymentGateway.Fake.AcquiringBank.Api/Dockerfile
+  payment-gateway-api:
+    build:
+      context: .
+      dockerfile: ./Checkout.PaymentGateway.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerCompose
+    ports:
+      - 4000:80
+    depends_on:
+      - fake-acquiring-bank-api
+  integration-tests:
+    build:
+      context: .
+      dockerfile: ./Tests/Checkout.PaymentGateway.Api.Tests.Integration/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerCompose
+    depends_on:
+      - payment-gateway-api
