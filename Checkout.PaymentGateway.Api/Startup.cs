@@ -1,6 +1,8 @@
 ﻿using Checkout.PaymentGateway.Api.Mvc;
+using Checkout.PaymentGateway.Api.Services;
 using Checkout.PaymentGateway.Service;
 using Checkout.PaymentGateway.Service.Options;
+using Checkout.PaymentGateway.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +25,9 @@ namespace Checkout.PaymentGateway.Api
         {
             services
                 .AddPaymentGatewayServices()
-                .AddPaymentGatewayApi();
-
-            services
-                .Configure<AcquiringBankApiOptions>(_configuration.GetSection("AcquiringBankApi"));
-
-            services
+                .AddSingleton<DummyAuthenticationMiddleware>()
+                .AddSingleton<IUserContext, HttpContextUserContext>()
+                .Configure<AcquiringBankApiOptions>(_configuration.GetSection("AcquiringBankApi"))
                 .AddSwaggerGen(options =>
                 {
                     options.DescribeAllEnumsAsStrings();
