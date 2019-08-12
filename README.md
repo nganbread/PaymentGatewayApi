@@ -52,7 +52,7 @@ Follow [Get Started](#Get-Started) and navigate to `/swagger`
     - When `integration-tests` is started it will automatically execute the integration tests against the API, which is then set up to communicate with the faked acquiring bank.
 - Documentation
     - API documentation is automatically discovered and made accessible by swagger
-    - Configuring the code to be auto discoverable by swagger can be difficult sometimes
+    - Configuring the code to be auto discoverable by swagger can be difficult sometimes. Eg; the API query parameter descriptions are not captured. Moving to an `openapi.json` could be more easier to create.
 
 ## Limitations
 
