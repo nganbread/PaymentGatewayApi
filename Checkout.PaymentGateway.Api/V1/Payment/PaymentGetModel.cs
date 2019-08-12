@@ -18,5 +18,7 @@ namespace Checkout.PaymentGateway.Api.V1.Payment
         public decimal Amount { get; set; }
 
         public string CardNumber { get; set; }
+
+        public Guid AcquiringBankPaymentId { get; set; }
     }
 }
